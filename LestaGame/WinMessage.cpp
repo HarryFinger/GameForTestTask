@@ -15,52 +15,56 @@ WinMessage::WinMessage()
 	invitation_sprite.setPosition(155.f, -5.f);
 
 	font.loadFromFile("./../LestaGame/font/calibri.ttf");
-	win_message.setFont(font); // select the font
-	win_message.setString("Press any key to exit...");// set the string to display
-	win_message.setCharacterSize(font_size); // in pixels
-	win_message.setFillColor(Color::Red); // set the color
-	win_message.setStyle(Text::Bold);// set the text style
-	win_message.move(220, 710);
+	info_message.setFont(font); // select the font
+	info_message.setString("use \"left/right/up/down\" buttons to move selector");// set the string to display
+	info_message.setCharacterSize(28); // in pixels
+	info_message.setFillColor(Color::Blue); // set the color
+	info_message.setStyle(Text::Bold);// set the text style
+	info_message.move(20, 12);
+	info_message1 = info_message;
+	info_message.setString("use \"space\" button to interact");// set the string to display
+	info_message1.setPosition(20, 42);
+
+	white_rect.move(15, 15);
+	white_rect.setFillColor(Color(160, 160, 160));
+	white_rect.setSize(Vector2f(640, 66));
+
 }
 
-void WinMessage::TextBlink()
+void WinMessage::TextBlink(Sprite& sprite, uint32_t speed) 
 {
-	float blink_time = blink_clock.getElapsedTime().asMilliseconds();
-	if (blink_time > BLINK_SPEED)
-	{
-		blink_clock.restart();
-		press_any_sprite.setColor(Color(255, 255, 255, blink));
+	sprite.setColor(Color(255, 255, 255, blink));
 
-		if (blink_state == BlinkState::Falling)
+	if (blink_state == BlinkState::Falling)
+	{
+		blink -= speed;
+		if (blink <= 50)
 		{
-			--blink;
-			if (blink <= 50)
-			{
-				blink_state = BlinkState::Growing;
-			}
+			blink_state = BlinkState::Growing;
 		}
-		if (blink_state == BlinkState::Growing)
+	}
+
+	if (blink_state == BlinkState::Growing)
+	{
+		blink += speed;
+		if (blink >= 250)
 		{
-			++blink;
-			if (blink >= 250)
-			{
-				blink_state = BlinkState::Falling;
-			}
+			blink_state = BlinkState::Falling;
 		}
 	}
 }
 
 void WinMessage::DrawMessage(RenderWindow& window)
 {
-	TextBlink();
+	//TextBlink(this->press_any_sprite, 1);
 	window.draw(press_any_sprite);
 	window.draw(win_sprite);
 }
 
 void WinMessage::DrawInvitationMessage(RenderWindow& window)
 {
-	if (true)
-	{
-		window.draw(invitation_sprite);
-	}
+	window.draw(white_rect);
+	window.draw(info_message);
+	window.draw(info_message1);
+	//window.draw(invitation_sprite);
 }

@@ -7,6 +7,7 @@ extern const uint32_t WINDOW_SIZE;
 extern const uint32_t TILE_SIZE;
 extern const uint32_t GRID_NUMBER;
 extern const uint32_t WALL_OFFSET;
+extern const uint32_t BORDER_SIZE;
 
 using namespace sf;
 
@@ -37,6 +38,7 @@ public:
 	Selector();
 	void DrawSelector(RenderWindow&);
 	void MoveSelector(const int&, const int&);
+	void StopBlink();
 private:
 	void SelectorBlink();
 

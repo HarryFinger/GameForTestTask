@@ -5,17 +5,19 @@
 #include <algorithm>
 #include <random>
 
-#include "Selector.h"
 #include "FieldElementType.h"
 
-#define DEBUG
+//#define DEBUG
 
 using namespace sf;
+
+class Selector; //forward declaration
 
 extern const uint32_t WINDOW_SIZE;
 extern const uint32_t TILE_SIZE;
 extern const uint32_t GRID_NUMBER;
 extern const uint32_t WALL_OFFSET;
+extern const uint32_t BORDER_SIZE;
 
 class PlayingField
 {
@@ -58,9 +60,10 @@ public:
 	bool CanPlaced(const Selector&);
 	bool CheckIsEmpty(const uint32_t&, const uint32_t&);
 
-	void CheckGameStatus();
+	void ValidateWinStatus();
 
 	std::vector<std::vector<FieldElementType>> field_array;
 private:
 	void RandomChipGenerator();
+	bool ColumnCheck(const size_t, FieldElementType);
 };

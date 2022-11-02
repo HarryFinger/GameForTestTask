@@ -11,6 +11,7 @@ Selector::Selector() {
 void Selector::SelectorBlink()
 {
 	float blink_time = blink_clock.getElapsedTime().asMilliseconds();
+
 	if (blink_time > BLINK_SPEED)
 	{
 		blink_clock.restart();
@@ -24,6 +25,7 @@ void Selector::SelectorBlink()
 				blink_state = BlinkState::Growing;
 			}
 		}
+
 		if (blink_state == BlinkState::Growing)
 		{
 			++blink;
@@ -70,10 +72,15 @@ void Selector::MoveSelector(const int& dx = 0, const int& dy = 0)
 	uint32_t tmp_x = this->x + TILE_SIZE * dx;
 	uint32_t tmp_y = this->y + TILE_SIZE * dy;
 	
-	if ((tmp_x < WINDOW_SIZE) && (tmp_x >= 0) && (tmp_y < WINDOW_SIZE) && (tmp_y >= 0))
+
+	if ((tmp_x < (WINDOW_SIZE - BORDER_SIZE))  &&  (tmp_x >= BORDER_SIZE)  &&  (tmp_y < (WINDOW_SIZE - BORDER_SIZE))  &&  (tmp_y >= BORDER_SIZE))
 	{
 		this->x += TILE_SIZE * dx;
 		this->y += TILE_SIZE * dy;
 	}
-	
+}
+
+void Selector::StopBlink()
+{
+	sprite.setColor(Color(255, 255, 255, 0));
 }

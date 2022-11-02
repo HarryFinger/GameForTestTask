@@ -6,9 +6,9 @@ using namespace sf;
 class SoundManager
 {
 public:
-	Music main_music;
-	Music achieve_music;
-	Music win_music;
+	Music main_music; //main theme
+	Music achieve_music; //play's when chip picked or droped
+	Music win_music; //win state music
 
 
 	SoundManager()

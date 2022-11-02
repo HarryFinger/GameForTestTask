@@ -2,8 +2,8 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <vector>
-
-
+#include <Windows.h>
+#include <mutex>
 
 #include "PlayingField.h"
 #include "Selector.h"
@@ -11,38 +11,39 @@
 #include "WinMessage.h"
 #include "SoundManager.h"
 
-
-
 using namespace sf;
 
 const uint32_t WINDOW_SIZE = 900;
 const uint32_t TILE_SIZE = 100;
 const uint32_t GRID_NUMBER = WINDOW_SIZE / TILE_SIZE;
 const uint32_t WALL_OFFSET = 2;
+const uint32_t BORDER_SIZE = TILE_SIZE * 2;
 
 const uint32_t M = 9; //height of game field
 const uint32_t N = 9; //width of game field
 
 int main()
 {
-	Clock main_clock; 
+	Clock main_clock;
 	SoundManager sound_manager;
-	PlayingField playing_field(N,M); //generate playing field
+	PlayingField playing_field(N, M); //generate playing field
 	Selector selector; //generate main selector
 	WinMessage win_message; //generate win message statement
+
 	int32_t dx = 0; //direction (right or left)
 	int32_t dy = 0; //direction (up or down)
 	bool space_pressed = false;
-	
+
 	RenderWindow window(VideoMode(WINDOW_SIZE, WINDOW_SIZE), "LestaGame!");
 
 	Event event;
+
 	//main loop
 	while (window.isOpen())
 	{
 		while (window.pollEvent(event))
 		{
-			if ((event.type == Event::Closed)    ||   (playing_field.getGameOverStatus() && event.type == Event::KeyPressed))
+			if ((event.type == Event::Closed) || (playing_field.getGameOverStatus() && event.type == Event::KeyPressed))
 			{
 				window.close();
 			}
@@ -60,8 +61,8 @@ int main()
 
 		if (!playing_field.getGameOverStatus()) //if game is not over
 		{
-			//window.clear(Color::Black); //crear window
-			
+			window.clear(Color::Black); //crear window
+
 			//move state
 			if (!selector.is_selected)
 				selector.MoveSelector(dx, dy);
@@ -100,41 +101,46 @@ int main()
 			}
 
 			//is game is ended
-			playing_field.CheckGameStatus();
+			playing_field.ValidateWinStatus();
 
-			//drawing playing_field
-			playing_field.DrawField(window);
-
-			//drawing selector
-			selector.DrawSelector(window);
-
-			//win state
-			if (playing_field.getGameOverStatus()) 
-			{
-				sound_manager.main_music.stop();
-				sound_manager.win_music.play();
-			}
-
-			//invitation message
-			if (main_clock.getElapsedTime().asSeconds() < 5)
-			{
-				win_message.DrawInvitationMessage(window);
-			}
-			
 			//reset statement
 			dx = 0;
 			dy = 0;
 			space_pressed = false;
 		}
-		
+
+
+		//drawing playing_field
+		playing_field.DrawField(window);
+
+		//drawing selector
+		if (!playing_field.getGameOverStatus())
+		{
+			selector.DrawSelector(window);
+		}
+
 		//win state
+		static bool initialized = false;
+		if (!initialized && playing_field.getGameOverStatus())
+		{
+			initialized = true;
+			sound_manager.main_music.stop(); 
+			sound_manager.win_music.play();
+		}
+
+		//invitation message
+		if (main_clock.getElapsedTime().asSeconds() < 10)
+		{
+			win_message.DrawInvitationMessage(window);
+		}
+	
 		if (playing_field.getGameOverStatus())
 		{
+			selector.StopBlink();
 			win_message.DrawMessage(window);
 		}
-		
+
 		window.display();
 	}
-
 	return 0;
 }

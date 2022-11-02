@@ -6,8 +6,7 @@ class WinMessage
 {
 private:
 	Font font;
-	Text win_message;
-	uint32_t font_size = 52;
+	Text info_message, info_message1;
 
 	Texture win_texture;
 	Sprite win_sprite;
@@ -18,9 +17,9 @@ private:
 	Texture invitation_texture;
 	Sprite invitation_sprite;
 
-	Clock blink_clock;
+	RectangleShape white_rect;
+
 	uint32_t blink = 255;
-	const uint32_t BLINK_SPEED = 1;
 
 	enum BlinkState
 	{
@@ -28,7 +27,7 @@ private:
 		Growing
 	} blink_state = BlinkState::Falling;
 
-	void TextBlink();
+	void TextBlink(Sprite&, uint32_t);
 
 public:
 	WinMessage();

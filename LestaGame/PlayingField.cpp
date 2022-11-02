@@ -1,4 +1,5 @@
 #include "PlayingField.h"
+#include "Selector.h"
 
 
 PlayingField::PlayingField(const uint32_t N, const uint32_t M)
@@ -42,22 +43,39 @@ PlayingField::PlayingField(const uint32_t N, const uint32_t M)
 		field_array.push_back(vec);
 	}
 
-	//option field(blocks)
+#ifdef DEBUG
+	field_array[2][2] = FieldElementType::BlueChip;
+	field_array[2][3] = FieldElementType::BlueChip;
+	field_array[2][4] = FieldElementType::BlueChip;
+	field_array[2][5] = FieldElementType::BlueChip;
+	field_array[2][6] = FieldElementType::BlueChip;
+
+	field_array[4][2] = FieldElementType::YellowChip;
+	field_array[4][3] = FieldElementType::GreenChip;
+	field_array[4][4] = FieldElementType::GreenChip;
+	field_array[4][5] = FieldElementType::GreenChip;
+	field_array[4][6] = FieldElementType::GreenChip;
+
+	field_array[6][2] = FieldElementType::GreenChip;
+	field_array[6][3] = FieldElementType::YellowChip;
+	field_array[6][4] = FieldElementType::YellowChip;
+	field_array[6][5] = FieldElementType::YellowChip;
+	field_array[6][6] = FieldElementType::YellowChip;
+#endif // DEBUG
+
+
 #ifndef DEBUG
+	//option field(blocks)
 	field_array[3][2] = FieldElementType::Rock1;
 	field_array[5][2] = FieldElementType::Rock1;
-	field_array[3][4] = FieldElementType::Rock1;
+	field_array[3][4] = FieldElementType::Rock2;
 	field_array[5][4] = FieldElementType::Rock1;
-	field_array[3][6] = FieldElementType::Rock1;
+	field_array[3][6] = FieldElementType::Rock2;
 	field_array[5][6] = FieldElementType::Rock1;
-#endif
 
-	//spawned chips
-	uint32_t blue_count = 0;
-	uint32_t green_count = 0;
-	uint32_t yellow_count = 0;
-	
-	RandomChipGenerator();
+	RandomChipGenerator(); //generate chips 
+#endif // not DEBUG
+
 
 	//to do randomizer
 	for (size_t i = 2; i <= 6; i += 2)
@@ -71,26 +89,6 @@ PlayingField::PlayingField(const uint32_t N, const uint32_t M)
 			}
 		}
 	}
-	
-	
-	/*field_array[2][2] = FieldElementType::BlueChip;
-	field_array[2][3] = FieldElementType::BlueChip;
-	field_array[2][4] = FieldElementType::BlueChip;
-	field_array[2][5] = FieldElementType::BlueChip;
-	field_array[2][6] = FieldElementType::BlueChip;
-
-	field_array[4][2] = FieldElementType::GreenChip;
-	field_array[4][3] = FieldElementType::GreenChip;
-	field_array[4][4] = FieldElementType::GreenChip;
-	field_array[4][5] = FieldElementType::GreenChip;
-	field_array[4][6] = FieldElementType::YellowChip;
-
-	field_array[6][2] = FieldElementType::YellowChip;
-	field_array[6][3] = FieldElementType::YellowChip;
-	field_array[6][4] = FieldElementType::YellowChip;
-	field_array[6][5] = FieldElementType::YellowChip;
-	field_array[6][6] = FieldElementType::GreenChip;*/
-	
 
 	field_array[2][8] = FieldElementType::BlueChipArrow;
 	field_array[4][8] = FieldElementType::GreenChipArrow;
@@ -161,7 +159,6 @@ bool PlayingField::CanPicked(const Selector& selector)
 	uint32_t j = selector.y / TILE_SIZE;
 	if ((field_array[i][j] == FieldElementType::BlueChip) || (field_array[i][j] == FieldElementType::GreenChip) || (field_array[i][j] == FieldElementType::YellowChip))
 	{
-		//std::cout << "CAN PICKED!!!\n";
 		return true;
 	}
 	else return false;
@@ -173,7 +170,6 @@ bool PlayingField::CanPlaced(const Selector& selector)
 	uint32_t j = selector.y / TILE_SIZE;
 	if (field_array[i][j] == FieldElementType::Empty)
 	{
-		//std::cout << "CAN PLACE!!!\n";
 		return true;
 	}
 	else return false;
@@ -189,18 +185,9 @@ bool PlayingField::CheckIsEmpty(const uint32_t& x, const uint32_t& y)
 		return false;
 }
 
-void PlayingField::CheckGameStatus()
+void PlayingField::ValidateWinStatus()
 {
-	if (((field_array[2][2] == FieldElementType::BlueChip) && (field_array[2][3] == FieldElementType::BlueChip) &&
-		 (field_array[2][4] == FieldElementType::BlueChip) && (field_array[2][5] == FieldElementType::BlueChip) &&
-		 (field_array[2][6] == FieldElementType::BlueChip)) &&
-		 (field_array[4][2] == FieldElementType::GreenChip) && (field_array[4][3] == FieldElementType::GreenChip) &&
-		 (field_array[4][4] == FieldElementType::GreenChip) && (field_array[4][5] == FieldElementType::GreenChip) &&
-		 (field_array[4][6] == FieldElementType::GreenChip) &&
-		 (field_array[6][2] == FieldElementType::YellowChip) && (field_array[6][3] == FieldElementType::YellowChip) &&
-		 (field_array[6][4] == FieldElementType::YellowChip) && (field_array[6][5] == FieldElementType::YellowChip) &&
-		 (field_array[6][6] == FieldElementType::YellowChip))
-		game_over = true;
+	game_over = (ColumnCheck(2, FieldElementType::BlueChip) && ColumnCheck(4, FieldElementType::GreenChip) && ColumnCheck(6, FieldElementType::YellowChip));
 }
 
 void PlayingField::RandomChipGenerator()
@@ -215,4 +202,16 @@ void PlayingField::RandomChipGenerator()
 	std::default_random_engine rng(r());
 	std::shuffle(chip_array.begin(), chip_array.end(), rng);
 
+}
+
+bool PlayingField::ColumnCheck(const size_t index, FieldElementType type)
+{
+	if (field_array[index][2] != type)
+		return false;
+
+	return
+		(field_array[index][2] == field_array[index][3]) &&
+		(field_array[index][2] == field_array[index][4]) &&
+		(field_array[index][2] == field_array[index][5]) &&
+		(field_array[index][2] == field_array[index][6]);
 }
