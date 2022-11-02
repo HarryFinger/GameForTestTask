@@ -18,16 +18,19 @@ WinMessage::WinMessage()
 	info_message.setFont(font); // select the font
 	info_message.setString("use \"left/right/up/down\" buttons to move selector");// set the string to display
 	info_message.setCharacterSize(28); // in pixels
-	info_message.setFillColor(Color::Blue); // set the color
+	info_message.setFillColor(Color(255, 255, 255)); // set the color
 	info_message.setStyle(Text::Bold);// set the text style
 	info_message.move(20, 12);
+
 	info_message1 = info_message;
-	info_message.setString("use \"space\" button to interact");// set the string to display
+	info_message1.setString("use \"space\" button to interact");// set the string to display
 	info_message1.setPosition(20, 42);
 
-	white_rect.move(15, 15);
-	white_rect.setFillColor(Color(160, 160, 160));
-	white_rect.setSize(Vector2f(640, 66));
+	rect.move(15, 15);
+	rect.setFillColor(Color(160, 160, 160));
+	rect.setOutlineThickness(5.0f);
+	rect.setOutlineColor(Color(100, 100, 100));
+	rect.setSize(Vector2f(640, 66));
 
 }
 
@@ -63,7 +66,7 @@ void WinMessage::DrawMessage(RenderWindow& window)
 
 void WinMessage::DrawInvitationMessage(RenderWindow& window)
 {
-	window.draw(white_rect);
+	window.draw(rect);
 	window.draw(info_message);
 	window.draw(info_message1);
 	//window.draw(invitation_sprite);

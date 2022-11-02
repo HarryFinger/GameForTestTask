@@ -17,7 +17,7 @@ private:
 	Texture invitation_texture;
 	Sprite invitation_sprite;
 
-	RectangleShape white_rect;
+	RectangleShape rect;
 
 	uint32_t blink = 255;
 

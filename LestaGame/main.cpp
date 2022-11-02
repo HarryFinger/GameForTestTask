@@ -129,7 +129,7 @@ int main()
 		}
 
 		//invitation message
-		if (main_clock.getElapsedTime().asSeconds() < 10)
+		if (main_clock.getElapsedTime().asSeconds() < 12)
 		{
 			win_message.DrawInvitationMessage(window);
 		}
