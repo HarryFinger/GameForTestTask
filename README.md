@@ -4,8 +4,8 @@ SFML library was used in the project.
 Music environment included.  
 
 Rules: need to match 5 chips in a column by color.  
-input: "left/right/up/down" buttons to move selector  
-       "space" button to interact  
+input: "left/right/up/down" buttons to move selector.  
+       "space" button to interact.  
 
 Execution file into build/LestaGame.  
 To build you need SFML.
