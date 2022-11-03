@@ -139,7 +139,7 @@ int main()
 			selector.StopBlink();
 			win_message.DrawMessage(window);
 		}
-
+		
 		window.display();
 	}
 	return 0;

@@ -14,9 +14,6 @@ private:
 	Texture press_any_texture;
 	Sprite press_any_sprite;
 
-	Texture invitation_texture;
-	Sprite invitation_sprite;
-
 	RectangleShape rect;
 
 	uint32_t blink = 255;

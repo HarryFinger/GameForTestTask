@@ -22,6 +22,9 @@ extern const uint32_t BORDER_SIZE;
 class PlayingField
 {
 public:
+	Texture lives_texture;
+	Sprite lives_sprite;
+
 	Texture main_texture;
 	Texture back_texture;
 	Sprite back_sprite;

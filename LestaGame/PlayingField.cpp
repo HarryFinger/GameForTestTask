@@ -4,6 +4,9 @@
 
 PlayingField::PlayingField(const uint32_t N, const uint32_t M)
 {
+	lives_texture.loadFromFile("./../LestaGame/images/lives.png");
+	lives_sprite.setTexture(lives_texture);
+
 	back_texture.loadFromFile("./../LestaGame/images/ground_1.png");
 	back_sprite.setTexture(back_texture);
 	main_texture.loadFromFile("./../LestaGame/images/new_tiles.png");
@@ -151,6 +154,7 @@ void PlayingField::DrawField(RenderWindow& window)
 			}
 		}
 	}
+	window.draw(lives_sprite);
 }
 
 bool PlayingField::CanPicked(const Selector& selector)

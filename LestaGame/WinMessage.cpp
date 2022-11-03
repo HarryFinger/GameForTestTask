@@ -10,10 +10,6 @@ WinMessage::WinMessage()
 	press_any_sprite.setTexture(press_any_texture);
 	press_any_sprite.setPosition(195.f, 650.f);
 
-	invitation_texture.loadFromFile("./../LestaGame/images/invitation_message.png");
-	invitation_sprite.setTexture(invitation_texture);
-	invitation_sprite.setPosition(155.f, -5.f);
-
 	font.loadFromFile("./../LestaGame/font/calibri.ttf");
 	info_message.setFont(font); // select the font
 	info_message.setString("use \"left/right/up/down\" buttons to move selector");// set the string to display
@@ -69,5 +65,4 @@ void WinMessage::DrawInvitationMessage(RenderWindow& window)
 	window.draw(rect);
 	window.draw(info_message);
 	window.draw(info_message1);
-	//window.draw(invitation_sprite);
 }
