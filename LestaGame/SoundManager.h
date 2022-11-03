@@ -10,7 +10,6 @@ public:
 	Music achieve_music; //play's when chip picked or droped
 	Music win_music; //win state music
 
-
 	SoundManager()
 	{
 

@@ -13,16 +13,18 @@ using namespace sf;
 
 class Selector
 {
+
 public:
 	FieldElementType chip_type = FieldElementType::Empty;
-	Texture texture;
-	Sprite sprite; //selector sprite
-	Sprite chip_sprite; //chip sprite if picked
 	bool is_selected = false;
 	uint32_t x = 400; //current position x
 	uint32_t y = 500; //current position y
 
 private:
+	Texture texture;
+	Sprite sprite; //selector sprite
+	Sprite chip_sprite; //chip sprite if picked
+
 	const float MIN_BLINK_THRESHOLD = 30.f;
 	const float MAX_BLINK_THRESHOLD = 250.f;
 	Clock blink_clock;
@@ -41,5 +43,4 @@ public:
 	void StopBlink();
 private:
 	void SelectorBlink();
-
 };

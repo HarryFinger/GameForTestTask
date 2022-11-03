@@ -30,32 +30,9 @@ WinMessage::WinMessage()
 
 }
 
-void WinMessage::TextBlink(Sprite& sprite, uint32_t speed) 
-{
-	sprite.setColor(Color(255, 255, 255, blink));
-
-	if (blink_state == BlinkState::Falling)
-	{
-		blink -= speed;
-		if (blink <= 50)
-		{
-			blink_state = BlinkState::Growing;
-		}
-	}
-
-	if (blink_state == BlinkState::Growing)
-	{
-		blink += speed;
-		if (blink >= 250)
-		{
-			blink_state = BlinkState::Falling;
-		}
-	}
-}
 
 void WinMessage::DrawMessage(RenderWindow& window)
 {
-	//TextBlink(this->press_any_sprite, 1);
 	window.draw(press_any_sprite);
 	window.draw(win_sprite);
 }

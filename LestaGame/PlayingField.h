@@ -1,7 +1,7 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include <SFML/Graphics.hpp>
 #include <algorithm>
 #include <random>
 
@@ -21,13 +21,14 @@ extern const uint32_t BORDER_SIZE;
 
 class PlayingField
 {
-public:
+private:
 	Texture lives_texture;
 	Sprite lives_sprite;
 
-	Texture main_texture;
 	Texture back_texture;
 	Sprite back_sprite;
+
+	Texture main_texture;
 	Sprite blue_chip_sprite;
 	Sprite green_chip_sprite;
 	Sprite yellow_chip_sprite;
@@ -37,7 +38,6 @@ public:
 	Sprite rock_sprite1;
 	Sprite rock_sprite2;
 	
-private:
 	std::vector<FieldElementType> chip_array;
 	const uint32_t BLUE_MAX_COUNT = 5;
 	const uint32_t GREEN_MAX_COUNT = 5;

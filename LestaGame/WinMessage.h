@@ -16,16 +16,6 @@ private:
 
 	RectangleShape rect;
 
-	uint32_t blink = 255;
-
-	enum BlinkState
-	{
-		Falling,
-		Growing
-	} blink_state = BlinkState::Falling;
-
-	void TextBlink(Sprite&, uint32_t);
-
 public:
 	WinMessage();
 	void DrawMessage(RenderWindow&);

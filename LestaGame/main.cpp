@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include <Windows.h>
-#include <mutex>
 
 #include "PlayingField.h"
 #include "Selector.h"
@@ -22,7 +21,10 @@ const uint32_t BORDER_SIZE = TILE_SIZE * 2;
 const uint32_t M = 9; //height of game field
 const uint32_t N = 9; //width of game field
 
-int main()
+
+
+INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+	PSTR lpCmdLine, INT nCmdShow)
 {
 	Clock main_clock;
 	SoundManager sound_manager;
