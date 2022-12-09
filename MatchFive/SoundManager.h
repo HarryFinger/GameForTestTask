@@ -13,9 +13,9 @@ public:
 	SoundManager()
 	{
 
-		main_music.openFromFile("./../LestaGame/music/crew_1.wav");
-		achieve_music.openFromFile("./../LestaGame/music/stone.wav");
-		win_music.openFromFile("./../LestaGame/music/mixkit_win_music.wav");
+		main_music.openFromFile("./../MatchFive/music/crew_1.wav");
+		achieve_music.openFromFile("./../MatchFive/music/stone.wav");
+		win_music.openFromFile("./../MatchFive/music/mixkit_win_music.wav");
 
 		main_music.setLoop(1);
 		main_music.setVolume(0.f);

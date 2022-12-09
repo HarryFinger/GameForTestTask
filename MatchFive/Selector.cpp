@@ -1,7 +1,7 @@
 #include "Selector.h"
 
 Selector::Selector() {
-	texture.loadFromFile("./../LestaGame/images/new_tiles.png");
+	texture.loadFromFile("./../MatchFive/images/new_tiles.png");
 	sprite.setTexture(texture);
 	chip_sprite.setTexture(texture);
 	sprite.move(static_cast<float>(x), static_cast<float>(y));

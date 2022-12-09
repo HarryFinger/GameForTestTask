@@ -4,12 +4,12 @@
 
 PlayingField::PlayingField(const uint32_t N, const uint32_t M)
 {
-	lives_texture.loadFromFile("./../LestaGame/images/lives.png");
+	lives_texture.loadFromFile("./../MatchFive/images/lives.png");
 	lives_sprite.setTexture(lives_texture);
 
-	back_texture.loadFromFile("./../LestaGame/images/ground_1.png");
+	back_texture.loadFromFile("./../MatchFive/images/ground_1.png");
 	back_sprite.setTexture(back_texture);
-	main_texture.loadFromFile("./../LestaGame/images/new_tiles.png");
+	main_texture.loadFromFile("./../MatchFive/images/new_tiles.png");
 	blue_chip_sprite.setTexture(main_texture);
 	blue_chip_sprite.setTextureRect(IntRect(0, 0, TILE_SIZE, TILE_SIZE));
 	green_chip_sprite.setTexture(main_texture);

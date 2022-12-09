@@ -2,15 +2,15 @@
 
 WinMessage::WinMessage()
 {
-	win_texture.loadFromFile("./../LestaGame/images/you_win_message.png");
+	win_texture.loadFromFile("./../MatchFive/images/you_win_message.png");
 	win_sprite.setTexture(win_texture);
 	win_sprite.setPosition(-20.f, -20.f);
 
-	press_any_texture.loadFromFile("./../LestaGame/images/press_message.png");
+	press_any_texture.loadFromFile("./../MatchFive/images/press_message.png");
 	press_any_sprite.setTexture(press_any_texture);
 	press_any_sprite.setPosition(195.f, 650.f);
 
-	font.loadFromFile("./../LestaGame/font/calibri.ttf");
+	font.loadFromFile("./../MatchFive/font/calibri.ttf");
 	info_message.setFont(font); // select the font
 	info_message.setString("use \"left/right/up/down\" buttons to move selector");// set the string to display
 	info_message.setCharacterSize(28); // in pixels

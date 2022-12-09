@@ -36,7 +36,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	int32_t dy = 0; //direction (up or down)
 	bool space_pressed = false;
 
-	RenderWindow window(VideoMode(WINDOW_SIZE, WINDOW_SIZE), "LestaGame!");
+	RenderWindow window(VideoMode(WINDOW_SIZE, WINDOW_SIZE), "MatchFive!");
 
 	Event event;
 
